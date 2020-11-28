@@ -15,4 +15,5 @@ This is a brand new Rails 6 / Passenger project running on Docker (docker-compos
 docker-compose build
 docker-compose up -d
 ```
-
+5. Add the same hostname to your local `/etc/hosts` file to point to your dev server
+6. Go to that url on your browser. You should see the "Yay! You’re on Rails!" message.
