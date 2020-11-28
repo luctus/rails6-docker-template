@@ -1,0 +1,30 @@
+version: "3.6"
+
+x-build: &x-build
+  context: .
+  dockerfile: Dockerfile
+  args:
+    - APP_ENV=development
+
+x-env-defaults: &x-env-defaults
+  - RAILS_ENV=development
+  - PASSENGER_APP_ENV=development
+  - RACK_ENV=development
+  - RAILS_MASTER_KEY=JlWKk1w4sRoiCPrkp77NVlhHLAFR2XDq
+
+services:
+
+  gsheets-reader:
+    build: *x-build
+    ports:
+      - "80"
+    volumes:
+      - .:/home/app/webapp
+    environment: *x-env-defaults
+    env_file:
+      - ./deploy/docker-files/.env.webapp
+
+networks:
+  default:
+    external:
+      name: nginxproxy_default
